@@ -1,14 +1,10 @@
-
 var request = require('request')
 var config = require('config')
-// var apiBaseUrl = 'https://api.mailgun.net/v3/sandbox122a6c78db1f4e6697058cf991e6bd7b.mailgun.org';
-// var apiKey     = 'key-1758fe0977b8932e43aafd24f5f262bd';
-// var from       = 'recursioner@gmail.com';
-// var to         = 'recursioner@gmail.com';
-// var subject    = 'Hello';
-// var text       = 'Testing some Mailgun awesomness!';
 
-const reducer = function(acc, cur, i){acc[i]={email: cur}; return acc};
+const reducer = function(acc, cur, i){
+    acc[i]={email: cur};
+    return acc
+};
 
 var send = function() {
     return function(req, res, next) {
