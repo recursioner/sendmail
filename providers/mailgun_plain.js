@@ -21,7 +21,11 @@ var send = function() {
 
         rp(options)
         .then(function(body){
-            res.send('Dilivered by MailGun!');
+            console.log(body);
+            if(body.message == 'Queued. Thank you.'){
+                res.send('Dilivered by MailGun!');
+            }
+            next();
         })
         .catch(function(err){
             console.log(err);

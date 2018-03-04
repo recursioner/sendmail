@@ -1,4 +1,5 @@
-var rp = require('request-promise')
+//var rp = require('request-promise')
+var request = require('request');
 var config = require('config')
 
 const reducer = function(acc, cur, i){
@@ -49,27 +50,31 @@ var send = function() {
             //   }
         };
 
-        rp(options)
-        .then(function(body) {
-            //console.log(body);
-            res.send('Diliverd by SendGrid!');
-        })
-        .catch(function(err){
-            console.log(err);
-            next();
-        });
-        // request.post(mail, function(err, response, body) {
-        //     if(err){
-        //         // failover to other mail service
-        //         console.log(err);
-        //         next();
-        //     }else{
-        //         console.log(response.statusCode);
-        //         //console.log(body)
-        //         res.send('Dilivered by SendGrid!')
-        //     }
+        // rp(options)
+        // .then(function(response, body) {
+        //     console.log(response);
+        //     console.log(body);
+        //     res.send('Diliverd by SendGrid!');
+        // })
+        // .catch(function(err){
+        //     console.log(err);
+        //     next();
         // });
-        
+        request.post(options, function(err, response, body) {
+            if(err){
+                // failover to other mail service
+                console.log(err);
+                next();
+            }else{
+                console.log(response.statusCode);
+                console.log(body)
+                if(response.statusCode >=200 && response.statusCode<=299){
+                    res.send('Dilivered')
+                }else{
+                    next();
+                }
+            }
+        });
     }
 }
 
