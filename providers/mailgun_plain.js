@@ -1,17 +1,11 @@
-
-var request = require('request')
+var rp = require('request-promise')
 var config = require('config')
-// var apiBaseUrl = 'https://api.mailgun.net/v3/sandbox122a6c78db1f4e6697058cf991e6bd7b.mailgun.org';
-// var apiKey     = 'key-1758fe0977b8932e43aafd24f5f262bd';
-// var from       = 'recursioner@gmail.com';
-// var to         = 'recursioner@gmail.com';
-// var subject    = 'Hello';
-// var text       = 'Testing some Mailgun awesomness!';
 
 var send = function() {
     return function(req, res, next) {
-        var mailgunOpts = {
-            url: config.get('mailgun.apiBaseUrl') + '/messages',
+        var options = {
+            method: 'POST',
+            url: config.get('mailgun.apiBaseUrl'),
             headers: {
                 Authorization: 'Basic ' + new Buffer('api:' + config.get('mailgun.apiKey')).toString('base64')
             },
@@ -24,19 +18,15 @@ var send = function() {
                 text: req.body.text
             }
         };
-        
-        request.post(mailgunOpts, function(err, response, body) {
-            if(err){
-                // failover to other mail service
-                console.log(err);
-                next();
-            }else{
-                console.log(response);
-                console.log(body)
-                res.send('Dilivered by MailGun!')
-            }
+
+        rp(options)
+        .then(function(body){
+            res.send('Dilivered by MailGun!');
+        })
+        .catch(function(err){
+            console.log(err);
+            next();
         });
-        
     }
 }
 

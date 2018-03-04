@@ -11,11 +11,7 @@ var users = require('./routes/users');
 var sendgrid_plain = require('./providers/sendgrid_plain');
 var mailgun_plain = require('./providers/mailgun_plain');
 
-//var sendgrid_3rd_party = require('./providers/sendgrid_3rd_party');
-//var mailgun_no3rd_party = require('./providers/mailgun_3rd_party');
-
-var validate = require('./schema/validate');
-var schema = require('./schema/schema');
+//var schema = require('./schema/schema');
 var app = express();
 
 // view engine setup
@@ -33,11 +29,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
+var validate = require('./schema/validate');
 app.post('/sendmail', validate.validate());
 
 app.post('/sendmail', mailgun_plain.send());
 
-//app.post('/sendmail', sendgrid_plain.send());
+app.post('/sendmail', sendgrid_plain.send());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

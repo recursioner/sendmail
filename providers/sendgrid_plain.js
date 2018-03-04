@@ -1,4 +1,4 @@
-var request = require('request')
+var rp = require('request-promise')
 var config = require('config')
 
 const reducer = function(acc, cur, i){
@@ -21,9 +21,8 @@ var send = function() {
         jsonData["content"] = [];
         jsonData["content"].push({"type": "text/plain", "value": req.body.text});
         
-
-        
-        var mail = {
+        var options = {
+            method: 'POST',
             url: config.get('sendgrid.apiBaseUrl'),
             headers: {
                 Authorization: 'Bearer ' + config.get('sendgrid.apiKey'),
@@ -49,18 +48,27 @@ var send = function() {
             //     ]
             //   }
         };
-        
-        request.post(mail, function(err, response, body) {
-            if(err){
-                // failover to other mail service
-                console.log(err);
-                next();
-            }else{
-                console.log(response);
-                console.log(body)
-                res.send('Dilivered by SendGrid!')
-            }
+
+        rp(options)
+        .then(function(body) {
+            //console.log(body);
+            res.send('Diliverd by SendGrid!');
+        })
+        .catch(function(err){
+            console.log(err);
+            next();
         });
+        // request.post(mail, function(err, response, body) {
+        //     if(err){
+        //         // failover to other mail service
+        //         console.log(err);
+        //         next();
+        //     }else{
+        //         console.log(response.statusCode);
+        //         //console.log(body)
+        //         res.send('Dilivered by SendGrid!')
+        //     }
+        // });
         
     }
 }
