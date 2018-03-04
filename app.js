@@ -14,7 +14,7 @@ var mailgun_plain = require('./providers/mailgun_plain');
 //var sendgrid_3rd_party = require('./providers/sendgrid_3rd_party');
 //var mailgun_no3rd_party = require('./providers/mailgun_3rd_party');
 
-var validate = require('./routes/validate');
+var validate = require('./schema/validate');
 var schema = require('./schema/schema');
 var app = express();
 
@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
-app.post('/sendmail', validate.validate(schema.sendmail));
+app.post('/sendmail', validate.validate());
 
 app.post('/sendmail', mailgun_plain.send());
 

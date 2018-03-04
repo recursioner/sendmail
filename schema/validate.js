@@ -2,6 +2,8 @@ var Joi = require('joi'),
     util = require('util'),
     _ = require('lodash');
 
+var schema = require('./schema');
+
 var BadRequestError = function (errors) {
     Error.captureStackTrace(this, this.constructor);
     this.name = 'BadRequestError';
@@ -11,12 +13,12 @@ var BadRequestError = function (errors) {
 
 util.inherits(BadRequestError, Error);
 
-var validate = function (schema) {
+var validate = function () {
     return function (req, res, next) {
         var body = _.extend({}, req.body);
         delete body.access_token; //remove access token for api calls
 
-        Joi.validate(body, schema, {abortEarly: false}, function (err, schemaResult) {
+        Joi.validate(body, schema.sendmail, {abortEarly: false}, function (err, schemaResult) {
             if (err) {
                 var details = [];
                 err.details.forEach(function (d) {

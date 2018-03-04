@@ -1,4 +1,5 @@
 var Joi = require('joi');
+
 module.exports = {
     sendmail: Joi.object().keys({
         sender: Joi.string().email(),
