@@ -25,11 +25,12 @@ var validate = function () {
                     details.push({message: d.message, path: d.path});
                 });
 
-                return next(new BadRequestError('Your input contains error!'));
+                res.status(400);
+                res.send('Bad Request');
+            }else{
+                req.schema = schemaResult;
+                return next();
             }
-
-            req.schema = schemaResult;
-            return next();
         });
     }
 };
