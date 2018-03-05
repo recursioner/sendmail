@@ -57,16 +57,12 @@ curl -X POST -H "Content-Type: application/json" --data '{"recipients": ["somebo
 ```
 ## Explaination
 |Field | Required or Optional | Explaination |
+| ------------- |:-------------:| -----:|
 |recipients| required| Multiple email addresses are supported|
-
 |carboncopys| optional| Multiple email addresses are supported|
-
 | blindcarboncopys |  optional|  Multiple email addresses are supported|
-
 | subject|  required | |
-
 | text|  required | |
-
 | sender |  required| |
 
 
