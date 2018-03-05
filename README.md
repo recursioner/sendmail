@@ -76,9 +76,21 @@ npm install
 
 
 ## Access service
+Use POST to request service
+
+```
+Content-Type: application/json
+```
+```
+Payload should be legal json data
+```
+
+Here's just an exmple to show how you can access it
 ```
 curl -X POST -H "Content-Type: application/json" --data '{"recipients": ["somebody@example.com","someoneelse@example.com"],"carboncopys": ["abc@example.com"],"blindcarboncopys":["xyz@example.com"],"subject": "Hello world","text": "Long long ago...","sender": "humpty@dumpty.com"}' http://yoururl:3000/sendmail/
 ```
+See below for what is legal format of message
+
 ## Explaination
 |Field | Required or Optional | Explaination |
 | ------------- |:-------------:| -----:|
