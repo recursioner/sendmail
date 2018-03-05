@@ -56,17 +56,18 @@ npm start
 curl -X POST -H "Content-Type: application/json" --data '{"recipients": ["somebody@example.com","someoneelse@example.com"],"carboncopys": ["abc@example.com"],"blindcarboncopys":["xyz@example.com"],"subject": "Hello world","text": "Long long ago...","sender": "humpty@dumpty.com"}' http://yoururl:3000/sendmail/
 ```
 ## Explaination
-recipients: required. Multiple email addresses are supported. 
+|Field | Required or Optional | Explaination |
+|recipients| required| Multiple email addresses are supported|
 
-carboncopys: optional. Multiple email addresses are supported. 
+|carboncopys| optional| Multiple email addresses are supported|
 
-blindcarboncopys: optional. Multiple email addresses are supported. 
+| blindcarboncopys |  optional|  Multiple email addresses are supported|
 
-subject: required.
+| subject|  required | |
 
-text: required.
+| text|  required | |
 
-sender: required.
+| sender |  required| |
 
 
 Missing required fields or wrong email format will be rejected and 400 will be returned. 
