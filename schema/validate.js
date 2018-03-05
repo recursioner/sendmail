@@ -26,7 +26,7 @@ var validate = function () {
                 });
 
                 res.status(400);
-                res.send('Bad Request');
+                res.send('Request illegal, please check project homepage on github for legal request format');
             }else{
                 req.schema = schemaResult;
                 return next();

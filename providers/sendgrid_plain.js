@@ -4,6 +4,7 @@ var config = require('config')
 var send = function() {
     return function(req, res, next) {
         // helper function and array for filtering duplicates
+        // because sendgrid strictly require no duplicate even across to,cc,bcc
         var filterArray = [];
         const reducer = function(acc, cur){
             if(filterArray.indexOf(cur) < 0){
@@ -47,11 +48,8 @@ var send = function() {
 
         request.post(options, function(err, response, body) {
             if(err){
-                console.debug(err);
                 next();
             }else{
-                console.debug(response.statusCode);
-                console.debug(body)
                 if(response.statusCode >=200 && response.statusCode<=299){
                     res.send('Delivered')
                 }else{

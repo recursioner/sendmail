@@ -2,7 +2,7 @@ var Joi = require('joi');
 
 module.exports = {
     sendmail: Joi.object().keys({
-        sender: Joi.string().email(),
+        sender: Joi.string().email().required(),
         recipients: Joi.array().items(
             Joi.string().email()
         ).required().min(1),
