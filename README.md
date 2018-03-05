@@ -29,6 +29,22 @@ npm test
 ## Before Running
 
 This project use MailGun and SendGrid as service providers, so you need to register your own account with these two sites and replace access key in config/default.json
+```
+config/default.json
+{
+    "mailgun" : {
+        "apiBaseUrl" : "https://api.mailgun.net/v3/sandbox[XXXXXXXXXXXXXXXXXXXXXXXXXXX]].mailgun.org/messages",
+        "apiKey"     : "key-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+    },
+
+    "sendgrid" : {
+        "apiBaseUrl" : "https://api.sendgrid.com/v3/mail/send",
+        "apiKey"     : "SG.ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ"
+    }
+}
+
+```
+
 
 ## Run service
 ```
