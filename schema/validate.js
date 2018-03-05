@@ -25,7 +25,7 @@ var validate = function () {
                     details.push({message: d.message, path: d.path});
                 });
 
-                return next(new BadRequestError(details));
+                return next(new BadRequestError('Your input contains error!'));
             }
 
             req.schema = schemaResult;

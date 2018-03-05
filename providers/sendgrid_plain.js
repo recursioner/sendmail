@@ -2,25 +2,42 @@
 var request = require('request');
 var config = require('config')
 
-const reducer = function(acc, cur, i){
-    acc[i]={email: cur};
-    return acc
-};
+
 
 var send = function() {
     return function(req, res, next) {
-        var recipients = req.body.recipients && req.body.recipients.reduce(reducer, []);
-        var carboncopys = req.body.carboncopys && req.body.carboncopys.reduce(reducer, []);
-        var blindcarboncopys = req.body.blindcarboncopys && req.body.blindcarboncopys.reduce(reducer, []);
+        // helper function and array for filtering duplicates
+        var filterArray = [];
+        const reducer = function(acc, cur){
+            if(filterArray.indexOf(cur) < 0){
+                acc.push({email: cur});
+                filterArray.push(cur);
+            }
+            return acc;
+        };
 
-        var personalization = {"subject": req.body.subject, "to": recipients};
+        var personalization = {};
+        personalization.subject = req.body.subject;
+        personalization.to = req.body.recipients.reduce(reducer, []);
+        if(req.body.carboncopys){
+            var cc = (req.body.carboncopys.reduce(reducer, []));
+            if(cc.length > 0){
+                personalization.cc = cc;
+            }
+        }
+        if(req.body.blindcarboncopys){
+            var bcc = (req.body.blindcarboncopys.reduce(reducer, []));
+            if(bcc.length > 0){
+                personalization.bcc = bcc;
+            }
+        }
         
         var jsonData = {};
-        jsonData["personalizations"] = [];
-        jsonData["personalizations"].push(personalization);
-        jsonData["from"] = {"email": req.body.sender};
-        jsonData["content"] = [];
-        jsonData["content"].push({"type": "text/plain", "value": req.body.text});
+        jsonData.personalizations = [];
+        jsonData.personalizations.push(personalization);
+        jsonData.from = {"email": req.body.sender};
+        jsonData.content = [];
+        jsonData.content.push({"type": "text/plain", "value": req.body.text});
         
         var options = {
             method: 'POST',
@@ -63,13 +80,13 @@ var send = function() {
         request.post(options, function(err, response, body) {
             if(err){
                 // failover to other mail service
-                console.log(err);
+                console.debug(err);
                 next();
             }else{
-                console.log(response.statusCode);
-                console.log(body)
+                console.debug(response.statusCode);
+                console.debug(body)
                 if(response.statusCode >=200 && response.statusCode<=299){
-                    res.send('Dilivered')
+                    res.send('Delivered')
                 }else{
                     next();
                 }

@@ -22,10 +22,11 @@ var send = function() {
         rp(options)
         .then(function(body){
             console.log(body);
-            if(body.message == 'Queued. Thank you.'){
-                res.send('Dilivered by MailGun!');
+            if(body.indexOf('Queued. Thank you.')){
+                res.send('Delivered');
+            }else{
+                next();
             }
-            next();
         })
         .catch(function(err){
             console.log(err);

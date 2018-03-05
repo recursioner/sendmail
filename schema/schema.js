@@ -5,7 +5,7 @@ module.exports = {
         sender: Joi.string().email(),
         recipients: Joi.array().items(
             Joi.string().email()
-        ).required(),
+        ).required().min(1),
 
         carboncopys: Joi.array().items(
             Joi.string().email()
@@ -16,6 +16,6 @@ module.exports = {
         ).optional(),
 
         subject: Joi.string().required(),
-        text: Joi.string().optional()
+        text: Joi.string().required()
     }),
 };
