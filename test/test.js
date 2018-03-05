@@ -4,7 +4,7 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let app = require('../app');
 let should = chai.should();
-var expect = require('Chai').expect;
+var expect = require('chai').expect;
 chai.use(chaiHttp);
 
 describe('/POST single recipient', ()=>{
