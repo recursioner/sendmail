@@ -33,7 +33,7 @@ This project use MailGun and SendGrid as service providers, so you need to regis
 config/default.json
 {
     "mailgun" : {
-        "apiBaseUrl" : "https://api.mailgun.net/v3/sandbox[XXXXXXXXXXXXXXXXXXXXXXXXXXX]].mailgun.org/messages",
+        "apiBaseUrl" : "https://api.mailgun.net/v3/sandboxXXXXXXXXXXXXXXXXXXXXXXXXXXX.mailgun.org/messages",
         "apiKey"     : "key-YYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
     },
 
