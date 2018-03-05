@@ -2,16 +2,14 @@
 
 Simple RESTFUL API for sending text only emails
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
-Latest Node and NPM
 
 ```
-Give examples
+node v8.9.4 or later
+
+npm 5.6.0 or later
+
 ```
 
 ### Installing
@@ -44,9 +42,9 @@ curl -X POST -H "Content-Type: application/json" --data '{"recipients": ["somebo
 ## Explaination
 recipients: required. Multiple email addresses are supported. 
 
-carboncopys: optional.
+carboncopys: optional. Multiple email addresses are supported. 
 
-blindcarboncopys: optional.
+blindcarboncopys: optional. Multiple email addresses are supported. 
 
 subject: required.
 
