@@ -44,8 +44,8 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  res.status(500);
-  res.send('Server error');
+  res.status(err.status);
+  res.send(err.message);
 });
 
 module.exports = app;
