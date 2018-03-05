@@ -43,11 +43,17 @@ curl -X POST -H "Content-Type: application/json" --data '{"recipients": ["somebo
 ```
 ## Explaination
 recipients: required. Multiple email addresses are supported. 
+
 carboncopys: optional.
+
 blindcarboncopys: optional.
+
 subject: required.
+
 text: required.
+
 sender: required.
+
 
 Missing required fields or wrong email format will be rejected and 400 will be returned. 
 
