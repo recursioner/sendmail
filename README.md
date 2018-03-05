@@ -50,6 +50,30 @@ config/default.json
 ```
 npm start
 ```
+If the server starts normally, you will see
+```
+> node ./bin/www
+```
+If npm fail to start due to some dependency missing, like below, 
+```
+Error: Cannot find module 'express'
+    at Function.Module._resolveFilename (module.js:469:15)
+    at Function.Module._load (module.js:417:25)
+    at Module.require (module.js:497:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (/home/lomoworx/tmp/sendmail/app.js:1:77)
+    at Module._compile (module.js:570:32)
+    at Object.Module._extensions..js (module.js:579:10)
+    at Module.load (module.js:487:32)
+    at tryModuleLoad (module.js:446:12)
+    at Function.Module._load (module.js:438:3)
+
+```
+try delete "node_modules" folder and rerun 
+```
+npm install
+```
+
 
 ## Access service
 ```
