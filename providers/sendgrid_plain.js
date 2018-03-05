@@ -1,8 +1,5 @@
-//var rp = require('request-promise')
 var request = require('request');
 var config = require('config')
-
-
 
 var send = function() {
     return function(req, res, next) {
@@ -46,40 +43,10 @@ var send = function() {
                 Authorization: 'Bearer ' + config.get('sendgrid.apiKey'),
             },
             json: jsonData
-            // json: {
-            //     "personalizations": [
-            //       {
-            //         "subject": req.body.subject,
-            //         "to": recipients,
-            //         "cc": carboncopys,
-            //         "bcc": blindcarboncopys
-            //       }
-            //     ],
-            //     "from": {
-            //       "email": req.body.sender
-            //     },
-            //     "content": [
-            //       {
-            //         "type": "text/plain",
-            //         "value": req.body.text
-            //       }
-            //     ]
-            //   }
         };
 
-        // rp(options)
-        // .then(function(response, body) {
-        //     console.log(response);
-        //     console.log(body);
-        //     res.send('Diliverd by SendGrid!');
-        // })
-        // .catch(function(err){
-        //     console.log(err);
-        //     next();
-        // });
         request.post(options, function(err, response, body) {
             if(err){
-                // failover to other mail service
                 console.debug(err);
                 next();
             }else{
