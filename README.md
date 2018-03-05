@@ -68,3 +68,6 @@ curl -X POST -H "Content-Type: application/json" --data '{"recipients": ["somebo
 
 Missing required fields or wrong email format will be rejected and 400 will be returned. 
 
+## Extra
+
+When using fake email address together with real email addresses, it's possible that even the real email address won't recieve the message. It's MailGun and SendGrid problem. So please try using some real test email address. 
