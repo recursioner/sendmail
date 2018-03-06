@@ -17,6 +17,7 @@ var send = function () {
             return acc;
         };
 
+        // Build http request
         var personalization = {};
         personalization.subject = req.body.subject;
         personalization.to = req.body.recipients.reduce(reducer, []);
@@ -49,6 +50,7 @@ var send = function () {
             json: jsonData
         };
 
+        // Do request
         request.post(options, function (err, response, body) {
             if (err) {
                 next();
