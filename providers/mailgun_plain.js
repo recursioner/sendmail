@@ -1,8 +1,10 @@
-var rp = require('request-promise')
-var config = require('config')
+'use strict';
 
-var send = function() {
-    return function(req, res, next) {
+var rp = require('request-promise');
+var config = require('config');
+
+var send = function () {
+    return function (req, res, next) {
         var options = {
             method: 'POST',
             url: config.get('mailgun.apiBaseUrl'),
@@ -20,19 +22,19 @@ var send = function() {
         };
 
         rp(options)
-        .then(function(body){
-            console.log(body);
-            if(body.indexOf('Queued. Thank you.') >= 0) { // This is a bit tricky, may need refactor
-                res.send('Delivered');
-            }else{
+            .then(function (body) {
+                console.log(body);
+                if (body.indexOf('Queued. Thank you.') >= 0) { // This is a bit tricky, may need refactor
+                    res.send('Delivered');
+                } else {
+                    next();
+                }
+            })
+            .catch(function (err) {
+                console.log(err);
                 next();
-            }
-        })
-        .catch(function(err){
-            console.log(err);
-            next();
-        });
-    }
-}
+            });
+    };
+};
 
-module.exports = {send: send}
+module.exports = {send: send};

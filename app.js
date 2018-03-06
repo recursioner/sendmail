@@ -1,13 +1,13 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var index = require('./routes/index');
 var users = require('./routes/users');
-
 var sendgrid_plain = require('./providers/sendgrid_plain');
 var mailgun_plain = require('./providers/mailgun_plain');
 
@@ -36,16 +36,16 @@ app.post('/sendmail', mailgun_plain.send());
 
 app.post('/sendmail', sendgrid_plain.send());
 
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  res.status(err.status);
-  res.send(err.message);
+app.use(function (err, req, res, next) {
+    res.status(err.status);
+    res.send(err.message);
 });
 
 module.exports = app;

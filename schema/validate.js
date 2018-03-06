@@ -1,7 +1,8 @@
-var Joi = require('joi'),
-    util = require('util'),
-    _ = require('lodash');
+'use strict';
 
+var Joi = require('joi');
+var util = require('util');
+var _ = require('lodash');
 var schema = require('./schema');
 
 var BadRequestError = function (errors) {
@@ -27,12 +28,12 @@ var validate = function () {
 
                 res.status(400);
                 res.send('Request illegal, please check project homepage on github for legal request format');
-            }else{
+            } else {
                 req.schema = schemaResult;
                 return next();
             }
         });
-    }
+    };
 };
 
 module.exports = {
