@@ -23,7 +23,6 @@ var send = function () {
 
         rp(options)
             .then(function (body) {
-                console.log(body);
                 if (body.indexOf('Queued. Thank you.') >= 0) { // This is a bit tricky, may need refactor
                     res.send('Delivered');
                 } else {
@@ -31,7 +30,6 @@ var send = function () {
                 }
             })
             .catch(function (err) {
-                console.log(err);
                 next();
             });
     };
